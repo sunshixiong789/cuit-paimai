@@ -1,0 +1,5 @@
+include 'cuit-paimai-app'
+include 'cuit-paimai-bower'
+include 'cuit-paimai-server'
+include 'cuit-paimai-resource'
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>头部</title>
+</head>
+<body>
+    <div class="cuit_header" data-th-fragment="cuit_header">
+        <div class="header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="user-menu">
+                            <ul class="list-unstyled list-inline">
+                                <li><a href="/"><i class="fa fa-user"></i>首页</a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i>收藏</a></li>
+                                <li><a href=""><i class="fa fa-user"></i>购物车</a></li>
+                                <li><a href="/userinfo"><i class="fa fa-user"></i>个人中心</a></li>
+                                <li class="dropdown dropdown-small">
+                                    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="/userinfo"><span
+                                            class="key"></span><span data-th-text="${session.username}?:'未登录'" class="value">未登录 </span><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li style="display: list-item"><a href="/login">登录</a></li>
+                                        <li style="display: list-item"><a href="/logout">退出</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="header-right">
+                            <ul class="list-unstyled list-inline">
+                                <li class="dropdown dropdown-small">
+                                    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                            class="key"></span><span class="value">消息 </span><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">未读消息</a></li>
+                                        <li><a href="#">消息中心</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown dropdown-small">
+                                    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                            class="key"></span><span class="value">收藏夹</span><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">收藏宝贝</a></li>
+                                        <li><a href="#">收藏商家</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End header area -->
+    </div>
+</body>
+</html>
