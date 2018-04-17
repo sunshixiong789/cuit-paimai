@@ -1,5 +1,6 @@
 package cn.edu.cuit.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -26,6 +27,7 @@ public class CuitAnnouncement implements Serializable {
 
     private String boday;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp insertTime;
 
     private String insertUser;

@@ -1,7 +1,7 @@
 package cn.edu.cuit.service.impl;
 
-import cn.edu.cuit.dao.CuitAdminDao;
-import cn.edu.cuit.model.CuitAdmin;
+import cn.edu.cuit.dao.CuitUserDao;
+import cn.edu.cuit.model.CuitUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private CuitAdminDao cuitAdminDao;
+    private CuitUserDao userDao;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -33,8 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CuitAdmin user = cuitAdminDao.findByName(username);
+        CuitUser user = userDao.findByUserName(username);
         String password = user.getPassWord();
-        return new User(username,password,true,true,true,true, AuthorityUtils.commaSeparatedStringToAuthorityList(user.getType()+",ROLE_USER"));
+        return new User(username,password,true,true,true,true, AuthorityUtils.commaSeparatedStringToAuthorityList(user.getAuthority()+",ROLE_USER"));
     }
 }

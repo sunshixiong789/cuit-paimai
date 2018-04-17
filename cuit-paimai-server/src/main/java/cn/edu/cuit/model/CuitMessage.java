@@ -32,8 +32,7 @@ public class CuitMessage implements Serializable {
 	private Integer sender;
 	/** 接收者 */
 	private Integer receiver;
-	/** 发送时间
- */
+	/** 发送时间*/
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Timestamp insertTime;
 }

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,11 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@RequestMapping(value = "/cuitUser")
 public class CuitUserController{
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private CuitUserService userService;
 
@@ -34,6 +39,7 @@ public class CuitUserController{
     @PostMapping
     public CommonResult add(@Valid @RequestBody CuitUser entity, BindingResult results) {
         BindingResultUtil.JudegResult(results);
+        entity.setPassWord(passwordEncoder.encode(entity.getPassWord()));
         return userService.add(entity);
     }
 
@@ -54,6 +60,7 @@ public class CuitUserController{
     @PutMapping
     public CommonResult update(@Valid @RequestBody CuitUser entity,BindingResult results){
         BindingResultUtil.JudegResult(results);
+        entity.setPassWord(passwordEncoder.encode(entity.getPassWord()));
         return userService.update(entity);
     }
 

@@ -36,6 +36,7 @@ public class CuitAdminController {
 
 	/**
 	 * 增加一条数据
+	 * @see   @Valid使Hibernate Validator生效(调试的时候，spring data jpa 也会做一次验证，具体有待研究)
 	 * @param entity
 	 * @return
 	 */

@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author sunshixiong on 2018/01/30.
  */
 public interface CuitUserDao extends JpaRepository<CuitUser,Integer> {
+
+    public CuitUser findByUserName(String userName);
 }
