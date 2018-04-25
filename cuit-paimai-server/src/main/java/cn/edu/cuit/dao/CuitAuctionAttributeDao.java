@@ -14,5 +14,5 @@ public interface CuitAuctionAttributeDao extends JpaRepository<CuitAuctionAttrib
      * @param commdoityId
      * @return
      */
-    public CuitAuctionAttribute findByCuitCommodityId(String commdoityId);
+    public CuitAuctionAttribute findByCuitCommodityId(Integer commdoityId);
 }

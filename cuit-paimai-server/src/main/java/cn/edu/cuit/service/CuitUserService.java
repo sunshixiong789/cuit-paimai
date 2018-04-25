@@ -43,4 +43,6 @@ public interface CuitUserService {
      * @return
      */
     Page queryPage(CuitUser entity, Pageable pageable);
+
+    CuitUser findByUsername(String userName);
 }

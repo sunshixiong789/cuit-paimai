@@ -85,4 +85,13 @@ public class CuitPictureController {
     public List<CuitPicture> queryById(CuitPicture entity) {
         return pictureService.queryList(entity);
     }
+    /**
+     *获取对应商品id的三张图片
+     * @return
+     */
+    @GetMapping(value = "/{id}")
+    public List<CuitPicture> getPictures(@PathVariable String id, @PageableDefault(size = 4,sort = "insertTime"
+            ,direction = Sort.Direction.ASC)Pageable pageable){
+        return pictureService.queryByCommodityId(id,pageable);
+    }
  }

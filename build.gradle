@@ -1,8 +1,9 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.RELEASE'
+		springBootVersion = '2.0.1.RELEASE'
 	}
 	repositories {
+		maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 		mavenCentral()
 	}
 	dependencies {
@@ -20,9 +21,10 @@ allprojects {
 subprojects {
 	buildscript {
 		ext {
-			springBootVersion = '2.0.0.RELEASE'
+			springBootVersion = '2.0.1.RELEASE'
 		}
 		repositories {
+			maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 			mavenCentral()
 		}
 		dependencies {
@@ -32,6 +34,7 @@ subprojects {
 	repositories {
 		maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 		mavenCentral()
+		mavenLocal()
 	}
 	dependencies{
 		compile('org.springframework.boot:spring-boot-starter')
@@ -43,6 +46,7 @@ subprojects {
 repositories {
 	maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {

@@ -51,4 +51,9 @@ public class CuitUserMoneyServiceImpl implements CuitUserMoneyService {
         Example example = Example.of(entity);
         return userMoneyDao.findAll(example,pageable);
     }
+
+    @Override
+    public CuitUserMoney findByUserId(String userId) {
+        return userMoneyDao.findByUserId(userId);
+    }
 }

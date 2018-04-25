@@ -69,7 +69,7 @@ public class CuitCommodityController {
      */
     @GetMapping
     public Page<CuitCommodity> query(CuitCommodity entity
-            , @PageableDefault(size = 20,sort = "id"
+            , @PageableDefault(size = 10,sort = "id"
             ,direction = Sort.Direction.ASC)Pageable pageable) {
         return commodityService.queryPage(entity,pageable);
     }

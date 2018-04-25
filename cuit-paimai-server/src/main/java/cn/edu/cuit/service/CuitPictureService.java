@@ -45,4 +45,10 @@ public interface CuitPictureService {
      * @return
      */
     Page queryPage(CuitPicture entity, Pageable pageable);
+    /**
+     * 通过商品id查询
+     * @param commodityId
+     * @return
+     */
+    List<CuitPicture> queryByCommodityId(String commodityId, Pageable pageable);
 }

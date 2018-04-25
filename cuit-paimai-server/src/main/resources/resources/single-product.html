@@ -12,9 +12,6 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
@@ -22,6 +19,8 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,15 +56,17 @@
                 <div class="product-content-right">
                     <div class="product-breadcroumb">
                         <a href="/">首页</a>
-                        <a href="/shop" >商品</a>
-                        <a href="" data-th-href="@{/single-product(id=${commodity.id})}" data-th-text="${commodity.name}">Sony Smart TV - 2015</a>
+                        <a href="/shop">商品</a>
+                        <a href="" data-th-href="@{/single-product(id=${commodity.id})}"
+                           data-th-text="${commodity.name}">Sony Smart TV - 2015</a>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="product-images">
                                 <div class="product-main-img">
-                                    <img src="img/product-2.jpg" alt="" data-th-src="@{/cuitfile/download(fileName=${commodity.picture},id=1)}">
+                                    <img src="img/product-2.jpg" alt=""
+                                         data-th-src="@{/cuitfile/download(fileName=${commodity.picture},id=1)}">
                                 </div>
 
                                 <div class="product-gallery">
@@ -78,29 +79,27 @@
 
                         <div class="col-sm-6">
                             <div class="product-inner">
-                                <h2 class="product-name" data-th-text="commodity.name">Sony Smart TV - 2015</h2>
+                                <h2 class="product-name" data-th-text="${commodity.name}">Sony Smart TV - 2015</h2>
                                 <div class="product-inner-price">
                                     <span>当前价格:</span>
-                                    <ins>$700.00</ins>
+                                    <ins data-th-text="${commodity.presentPrice}">$700.00</ins>
                                 </div>
-
+                                <div class="product-inner-price">
+                                    <span>结束时间:</span>
+                                    <ins data-th-text="${commodity.endTime}">$700.00</ins>
+                                </div>
                                 <form action="" class="cart">
                                     <div class="quantity">
                                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1"
                                                name="quantity" min="1" step="1">
                                     </div>
-                                    <button class="add_to_cart_button" type="submit">Add to cart</button>
+                                    <button class="add_to_cart_button" type="button">提交保证金</button>
                                 </form>
-
-                                <div class="product-inner-category">
-                                    <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a
-                                            href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
-                                </div>
 
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home"
-                                                                                  role="tab" data-toggle="tab">Description</a>
+                                                                                  role="tab" data-toggle="tab">描述</a>
                                         </li>
                                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
                                                                    data-toggle="tab">反馈</a></li>
@@ -113,13 +112,15 @@
                                             <p></p>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <h2>Reviews</h2>
+                                            <h2>信息填写</h2>
                                             <div class="submit-review">
-                                                <p><label for="name">Name</label> <input id="name" name="name" type="text"></p>
-                                                <p><label for="email">Email</label> <input id="email" name="email" type="email">
+                                                <p><label for="name">名字</label> <input id="name" name="name"
+                                                                                       type="text"></p>
+                                                <p><label for="email">邮箱</label> <input id="email" name="email"
+                                                                                        type="email">
                                                 </p>
                                                 <div class="rating-chooser">
-                                                    <p>Your rating</p>
+                                                    <p>评分</p>
 
                                                     <div class="rating-wrap-post">
                                                         <i class="fa fa-star"></i>
@@ -129,11 +130,11 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                 </div>
-                                                <p><label for="review">Your review</label> <textarea name="review" id=""
-                                                                                                     cols="30"
-                                                                                                     rows="10"></textarea>
+                                                <p><label for="review">反馈信息</label> <textarea name="review" id=""
+                                                                                              cols="30"
+                                                                                              rows="10"></textarea>
                                                 </p>
-                                                <p><input type="submit" value="Submit"></p>
+                                                <p><input type="submit" value="提交"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -142,6 +143,20 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action active">
+                        出价记录
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
+                    <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">Vestibulum at eros
+                    </button>
                 </div>
             </div>
         </div>
@@ -153,9 +168,6 @@
 <!-- Latest jQuery form server -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
 
-<!-- Bootstrap JS form CDN -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 <!-- jQuery sticky menu -->
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/jquery.sticky.js"></script>
@@ -165,5 +177,7 @@
 
 <!-- Main Script -->
 <script src="js/main.js"></script>
+<!-- Bootstrap JS form CDN -->
+<script src="bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

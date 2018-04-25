@@ -2,6 +2,9 @@ package cn.edu.cuit.controller;
 import cn.edu.cuit.dao.CuitAuctionAttributeDao;
 import cn.edu.cuit.dao.CuitCommodityDao;
 import cn.edu.cuit.model.CuitCommodity;
+import cn.edu.cuit.model.CuitUser;
+import cn.edu.cuit.service.CuitUserMoneyService;
+import cn.edu.cuit.service.CuitUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 /**
@@ -26,6 +30,11 @@ public class CuitViewController {
     private CuitCommodityDao cuitCommodityDao;
     @Autowired
     private CuitAuctionAttributeDao attributeDao;
+
+    @Autowired
+    private CuitUserService userService;
+    @Autowired
+    private CuitUserMoneyService moneyService;
 
     @GetMapping
     public String index(Model model,@AuthenticationPrincipal UserDetails user){
@@ -66,12 +75,19 @@ public class CuitViewController {
         Optional commodity = cuitCommodityDao.findById(id);
         CuitCommodity cuitCommodity = (CuitCommodity) commodity.get();
         model.addAttribute("commodity",cuitCommodity);
-        model.addAttribute("attribute",attributeDao.findByCuitCommodityId(String.valueOf(cuitCommodity.getId())));
+        model.addAttribute("attribute",attributeDao.findByCuitCommodityId(cuitCommodity.getId()));
         return "single-product";
     }
     @GetMapping(value = "/car")
     public String car(){
         return "car";
+    }
+
+    @GetMapping(value = "/money")
+    public String money(Model model, HttpSession session){
+        CuitUser user = userService.findByUsername((String) session.getAttribute("username"));
+        model.addAttribute("money",moneyService.findByUserId(String.valueOf(user.getId())));
+        return "money";
     }
 
 }

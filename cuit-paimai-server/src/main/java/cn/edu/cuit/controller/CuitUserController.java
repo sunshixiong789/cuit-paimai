@@ -74,7 +74,7 @@ public class CuitUserController{
      */
     @GetMapping
     public Page<CuitUser> query(CuitUser entity
-            , @PageableDefault(size = 20,sort = "id"
+            , @PageableDefault(size = 10,sort = "id"
             ,direction = Sort.Direction.ASC)Pageable pageable) {
         return userService.queryPage(entity,pageable);
     }

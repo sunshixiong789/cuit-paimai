@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2018/4/16 22:04
  */
 public interface CuitUserMoneyDao extends JpaRepository<CuitUserMoney,Integer> {
+
+    public CuitUserMoney findByUserId(String userId);
 }

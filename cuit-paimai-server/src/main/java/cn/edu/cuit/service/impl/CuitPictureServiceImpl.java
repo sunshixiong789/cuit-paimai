@@ -55,4 +55,8 @@ public class CuitPictureServiceImpl implements CuitPictureService {
         Example example = Example.of(entity);
         return pictureDao.findAll(example,pageable);
     }
+    @Override
+    public List<CuitPicture> queryByCommodityId(String commodityId, Pageable pageable) {
+        return pictureDao.findByCuitCommodityId(commodityId,pageable);
+    }
 }

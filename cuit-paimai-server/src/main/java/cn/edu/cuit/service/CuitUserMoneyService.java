@@ -43,4 +43,11 @@ public interface CuitUserMoneyService {
      * @return
      */
     Page queryPage(CuitUserMoney entity, Pageable pageable);
+
+    /**
+     * 通过用户id查找金额
+     * @param userId
+     * @return
+     */
+    CuitUserMoney findByUserId(String userId);
 }

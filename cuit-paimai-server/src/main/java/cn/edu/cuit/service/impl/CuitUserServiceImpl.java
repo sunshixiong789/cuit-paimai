@@ -51,4 +51,9 @@ public class CuitUserServiceImpl implements CuitUserService {
         Example example = Example.of(entity);
         return cuitUserDao.findAll(example,pageable);
     }
+
+    @Override
+    public CuitUser findByUsername(String userName) {
+        return cuitUserDao.findByUserName(userName);
+    }
 }
