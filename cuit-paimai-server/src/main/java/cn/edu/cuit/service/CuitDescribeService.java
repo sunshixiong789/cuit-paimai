@@ -43,4 +43,11 @@ public interface CuitDescribeService {
      * @return
      */
     Page queryPage(CuitDescribe entity, Pageable pageable);
+
+    /**
+     * 通过商品查找描述
+     * @param id
+     * @return
+     */
+    List<CuitDescribe> listByCommodityId(Integer id);
 }

@@ -23,9 +23,13 @@ public class CuitBidHistory implements Serializable {
 	@GeneratedValue
    	private Integer id;
 	private String price;
-	private String cuitCommodityName;
+	private String cuitCommodityId;
 	private String cuitUserName;
+	private String userId;
+	private String type;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+	private Timestamp insertTime;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Timestamp endTime;
-	private String end_price;
+	private String endPrice;
 }

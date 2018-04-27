@@ -1,10 +1,8 @@
 package cn.edu.cuit.controller;
 
 import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
-import cn.edu.cuit.dao.CuitCommodityDao;
-import cn.edu.cuit.model.CuitCommodity;
-import cn.edu.cuit.model.CuitCommodity;
-import cn.edu.cuit.service.CuitCommodityService;
+import cn.edu.cuit.model.CuitBid;
+import cn.edu.cuit.service.CuitBidService;
 import cn.edu.cuit.validator.BindingResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,14 +17,13 @@ import java.util.List;
 
 /**
  * @author sunshixiong
- * @date 2018/3/22 16:16
+ * @date 2018/4/25 22:42
  */
 @RestController
-@RequestMapping(value = "/cuitCommodity")
-public class CuitCommodityController {
-
+@RequestMapping(value = "cuitBid")
+public class CuitBidController {
     @Autowired
-    private CuitCommodityService commodityService;
+    private CuitBidService bidService;
 
     /**
      * 增加一条数据
@@ -34,9 +31,9 @@ public class CuitCommodityController {
      * @return
      */
     @PostMapping
-    public CommonResult add(@Valid @RequestBody CuitCommodity entity, BindingResult results) {
+    public CommonResult add(@Valid @RequestBody CuitBid entity, BindingResult results) {
         BindingResultUtil.JudegResult(results);
-        return commodityService.add(entity);
+        return bidService.add(entity);
     }
 
     /**
@@ -45,8 +42,8 @@ public class CuitCommodityController {
      * @return
      */
     @DeleteMapping
-    public CommonResult delete(@RequestBody CuitCommodity entity) {
-        return commodityService.delete(entity);
+    public CommonResult delete(@RequestBody CuitBid entity) {
+        return bidService.delete(entity);
     }
     /**
      * 修改数据
@@ -54,9 +51,9 @@ public class CuitCommodityController {
      * @return
      */
     @PutMapping
-    public CommonResult update(@Valid @RequestBody CuitCommodity entity,BindingResult results){
+    public CommonResult update(@Valid @RequestBody CuitBid entity,BindingResult results){
         BindingResultUtil.JudegResult(results);
-        return commodityService.update(entity);
+        return bidService.update(entity);
     }
 
     /**
@@ -68,10 +65,10 @@ public class CuitCommodityController {
      * @return
      */
     @GetMapping
-    public Page<CuitCommodity> query(CuitCommodity entity
+    public Page<CuitBid> query(CuitBid entity
             , @PageableDefault(size = 10,sort = "id"
             ,direction = Sort.Direction.ASC)Pageable pageable) {
-        return commodityService.queryPage(entity,pageable);
+        return bidService.queryPage(entity,pageable);
     }
 
     /**
@@ -80,12 +77,7 @@ public class CuitCommodityController {
      * @return
      */
     @GetMapping(value = "/list")
-    public List<CuitCommodity> queryById(CuitCommodity entity) {
-        return commodityService.queryList(entity);
-    }
-
-    @PostMapping(value = "/updateById")
-    public CommonResult updateById(String presentPrice, Integer id){
-        return commodityService.updateById(presentPrice,id);
+    public List<CuitBid> queryById(CuitBid entity) {
+        return bidService.queryList(entity);
     }
 }

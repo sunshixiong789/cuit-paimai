@@ -20,7 +20,7 @@ public interface CuitAdminDao extends JpaRepository<CuitAdmin,Integer>/*,JpaSpec
      */
     public CuitAdmin findByName(String name);
 
-    @Query(value = "select u from CuitAdmin u where u.id = ?1",nativeQuery = false)
+    @Query(value = "select u from CuitAdmin u where u.id = ?1")
     public CuitAdmin queryOne(Integer id);
 
     @Query(value = "SELECT u.name,u.pass_word,u.type,p.bid_increment,p.auction_organization,p.cuit_commodity_id FROM cuit_admin u,cuit_auction_attribute p",nativeQuery = true)

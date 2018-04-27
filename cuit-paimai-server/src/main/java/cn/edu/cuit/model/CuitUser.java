@@ -29,6 +29,7 @@ public class CuitUser implements Serializable {
 	private String email;
 	private String mobile;
 	private String photo;
+	private String sex;
 	private String birthday;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Timestamp creatTime;

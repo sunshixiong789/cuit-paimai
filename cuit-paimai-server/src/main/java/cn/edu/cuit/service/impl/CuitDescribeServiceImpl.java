@@ -51,4 +51,9 @@ public class CuitDescribeServiceImpl implements CuitDescribeService {
         Example example = Example.of(entity);
         return describeDao.findAll(example,pageable);
     }
+
+    @Override
+    public List<CuitDescribe> listByCommodityId(Integer id) {
+        return describeDao.findByCuitCommodityId(id);
+    }
 }

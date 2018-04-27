@@ -53,8 +53,8 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">消息中心</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/car">未读消息</a></dd>
-                    <dd><a href="/car">历史消息</a></dd>
+                    <dd><a href="/message">未读消息</a></dd>
+                    <dd><a href="/message">历史消息</a></dd>
                 </dl>
             </li>
         </ul>
@@ -158,6 +158,7 @@
             formdata.passWord = $("[name='password']").val();
             formdata.mobile = $("[name='mobile']").val();
             formdata.email = $("[name='email']").val();
+            formdata.description = $("[name='desc']").val();
             formdata.sex = $("input[name='sex']:checked").val();
             formdata.type = "user";
             formdata = JSON.stringify(formdata);
@@ -180,14 +181,15 @@
         $.ajax({
             type: "get",
             async: false,
-            url: "/cuitAdmin",
-            data: {name:[[${session.username}]]},
+            url: "/cuitUser",
+            data: {userName:[[${session.username}]]},
             success: function (result,status,xhr) {
                 $("[name='id']").val(result.content[0].id);
-                $("[name='name']").val(result.content[0].name);
+                $("[name='name']").val(result.content[0].userName);
                 $("[name='password']").val("");
                 $("[name='mobile']").val(result.content[0].mobile);
                 $("[name='email']").val(result.content[0].email);
+                $("[name='desc']").val(result.content[0].description);
                 if(result.content[0].sex=='男'){
                     $("[name='sex']:first").attr('checked', 'checked');
                     form.render();
