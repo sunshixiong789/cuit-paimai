@@ -244,7 +244,7 @@
             }, function () {
                 var params = {
                     cuitCommodityId: [[${commodity.id}]],
-                    cuitUserName: [[${user.userName}]],
+                    cuitUserName: [[${user.name}]],
                     endPrice: $("#bid_price").val(),
                     price: [[${commodity.presentPrice}]],
                     type: "1",
@@ -259,10 +259,10 @@
                     dataType: "json",
                     success: function (result, status, xhr) {
                         layer.msg('出价成功');
+                        window.location.reload();
                     },
                     error: function (xhr, status, error) {
                         layer.confirm('出价失败:' + xhr.responseText);
-                        return
                     }
                 });
                 $.ajax({
@@ -289,6 +289,33 @@
             });
         }
         else {
+            layer.confirm('你未提交定金！是否提交定金？', {
+                btn: ['确定', '取消']
+            }, function () {
+                var params = {
+                    bidPrice: [[${attribute.cashDeposit}]],
+                    commodityId: [[${commodity.id}]],
+                    userId: [[${user.id}]]
+                };
+                $.ajax({
+                    type: "post",
+                    async: false,
+                    url: "/cuitBid",
+                    data: JSON.stringify(params),
+                    contentType: 'application/json',
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        layer.confirm('成功提交保证金',{
+                            btn: ['确定', '关闭']
+                        },function () {
+                            window.location.reload();
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        layer.alert('保证金提交失败:' + xhr.responseText);
+                    }
+                });
+            });
         }
     }
 </script>

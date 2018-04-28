@@ -65,7 +65,11 @@
 			                        </div>
                                     <div class="form-group">
                                         <label class="sr-only">Password</label>
-                                        <input id="form_password" type="password" name="password" placeholder="Password..." class="form-username form-control">
+                                        <input id="form_password1" type="password" name="password" placeholder="第一次密码" class="form-username form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only">Password</label>
+                                        <input id="form_password2" type="password" name="password_regest" placeholder="第二次密码" class="form-username form-control">
                                     </div>
 			                        <button type="button" id="register" class="btn">注册</button>
 			                    </form>
@@ -114,25 +118,31 @@
                 layer.confirm('密码或者用户名不能为空');
                 return
             }
-            var formdata = JSON.stringify({
-                'name':$("#form_username").val(),
-                'passWord':$("#form_password").val(),
-                "type": "user"
-            })
-            $.ajax({
-                type: "post",
-                async: false,
-                url: "/cuitAdmin",
-                data: formdata,
-                contentType:'application/json',
-                dataType: "json",
-                success: function (result,status,xhr) {
-                    layer.confirm('注册成功:'+result.message);
-                },
-                error: function (xhr,status,error) {
-                    layer.confirm('注册失败:'+xhr.responseText);
-                }
-            });
+            else if($("#form_password1").val()!= $("#form_password2").val()){
+                layer.confirm('输入的两次密码不一样');
+                return
+            }
+            else{
+                var formdata = JSON.stringify({
+                    'userName':$("#form_username").val(),
+                    'passWord':$("#form_password1").val(),
+                    "type": "user"
+                })
+                $.ajax({
+                    type: "post",
+                    async: false,
+                    url: "/cuitUser",
+                    data: formdata,
+                    contentType:'application/json',
+                    dataType: "json",
+                    success: function (result,status,xhr) {
+                        layer.confirm('注册成功:'+result.message);
+                    },
+                    error: function (xhr,status,error) {
+                        layer.confirm('注册失败:'+xhr.responseText);
+                    }
+                });
+            }
         });
     </script>
     </body>
