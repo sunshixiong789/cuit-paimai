@@ -1,6 +1,6 @@
 package cn.edu.cuit.util;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonResult;
 import org.springframework.http.HttpStatus;
 
 /**

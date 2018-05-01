@@ -1,7 +1,7 @@
 package cn.edu.cuit.util;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonException;
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonException;
+import cn.edu.cuit.common.CommonResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

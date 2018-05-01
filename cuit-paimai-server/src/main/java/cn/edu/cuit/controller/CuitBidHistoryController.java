@@ -1,7 +1,6 @@
 package cn.edu.cuit.controller;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
-import cn.edu.cuit.dao.CuitPictureDao;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.model.CuitBidHistory;
 import cn.edu.cuit.service.CuitBidHistoryService;
 import cn.edu.cuit.validator.BindingResultUtil;

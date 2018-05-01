@@ -1,9 +1,8 @@
 package cn.edu.cuit.service.impl;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonCRUD;
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonCRUD;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.dao.CuitCommodityDao;
-import cn.edu.cuit.model.CuitCommodity;
 import cn.edu.cuit.model.CuitCommodity;
 import cn.edu.cuit.service.CuitCommodityService;
 import cn.edu.cuit.util.ServiceImplUtil;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 
 import javax.transaction.Transactional;
 import java.util.List;

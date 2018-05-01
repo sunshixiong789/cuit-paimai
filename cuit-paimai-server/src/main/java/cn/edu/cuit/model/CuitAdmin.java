@@ -1,6 +1,6 @@
 package cn.edu.cuit.model;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonJsonView;
+import cn.edu.cuit.common.CommonJsonView;
 import cn.edu.cuit.validator.TypeValid;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;

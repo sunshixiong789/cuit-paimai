@@ -147,9 +147,9 @@
                                         <div role="tabpanel" class="tab-pane fade" id="profile">
                                             <h2>信息填写</h2>
                                             <div class="submit-review">
-                                                <p><label for="name">名字</label> <input id="name" name="name"
+                                                <p><label for="feed_name">名字</label> <input id="feed_name" name="name"
                                                                                        type="text"></p>
-                                                <p><label for="email">邮箱</label> <input id="email" name="email"
+                                                <p><label for="feed_email">邮箱</label> <input id="feed_email" name="email"
                                                                                         type="email">
                                                 </p>
                                                 <div class="rating-chooser">
@@ -163,11 +163,11 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                 </div>
-                                                <p><label for="review">反馈信息</label> <textarea name="review" id=""
+                                                <p><label for="review">反馈信息</label> <textarea name="review" id="review"
                                                                                               cols="30"
                                                                                               rows="10"></textarea>
                                                 </p>
-                                                <p><input type="submit" value="提交"></p>
+                                                <p><input id="fankuitijiao" type="submit" value="提交"></p>
                                             </div>
                                         </div>
 
@@ -258,8 +258,11 @@
                     contentType: 'application/json',
                     dataType: "json",
                     success: function (result, status, xhr) {
-                        layer.msg('出价成功');
-                        window.location.reload();
+                        layer.confirm('出价成功',{
+                            btn: ['确定', '关闭']
+                        },function () {
+                            window.location.reload();
+                        });
                     },
                     error: function (xhr, status, error) {
                         layer.confirm('出价失败:' + xhr.responseText);
@@ -295,6 +298,7 @@
                 var params = {
                     bidPrice: [[${attribute.cashDeposit}]],
                     commodityId: [[${commodity.id}]],
+                    commodityName: [[${commodity.name}]],
                     userId: [[${user.id}]]
                 };
                 $.ajax({
@@ -318,6 +322,34 @@
             });
         }
     }
+    $("#fankuitijiao").click(function () {
+        var params = {
+            commodityId: [[${commodity.id}]],
+            commodityName: [[${commodity.name}]],
+            email: $("#feed_email").val(),
+            feedbackInformation: $("#review").val(),
+            userId: [[${user.id}]],
+            userName: $("#feed_name").val()
+        }
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "/cuitFeedback",
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (result, status, xhr) {
+                layer.confirm('反馈成功',{
+                    btn: ['确定', '关闭']
+                },function () {
+                    window.location.reload();
+            });
+            },
+            error: function (xhr, status, error) {
+                layer.alert('反馈失败，失败信息:' + xhr.responseText);
+            }
+        });
+    })
 </script>
 </body>
 </html>

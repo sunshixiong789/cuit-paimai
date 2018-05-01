@@ -1,10 +1,8 @@
 package cn.edu.cuit.service.impl;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonCRUD;
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonCRUD;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.dao.CuitPictureDao;
-import cn.edu.cuit.dao.CuitPictureDao;
-import cn.edu.cuit.model.CuitPicture;
 import cn.edu.cuit.model.CuitPicture;
 import cn.edu.cuit.service.CuitPictureService;
 import cn.edu.cuit.util.ServiceImplUtil;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

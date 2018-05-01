@@ -1,7 +1,7 @@
 package cn.edu.cuit.service.impl;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonCRUD;
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonCRUD;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.dao.CuitUserDao;
 import cn.edu.cuit.model.CuitUser;
 import cn.edu.cuit.service.CuitUserService;

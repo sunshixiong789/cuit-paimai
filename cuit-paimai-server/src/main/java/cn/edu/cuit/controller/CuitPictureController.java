@@ -1,9 +1,7 @@
 package cn.edu.cuit.controller;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.model.CuitPicture;
-import cn.edu.cuit.model.CuitPicture;
-import cn.edu.cuit.service.CuitPictureService;
 import cn.edu.cuit.service.CuitPictureService;
 import cn.edu.cuit.validator.BindingResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;

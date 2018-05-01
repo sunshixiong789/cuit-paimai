@@ -1,6 +1,6 @@
 package cn.edu.cuit.controller;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.model.CuitUser;
 import cn.edu.cuit.service.CuitUserService;
 import cn.edu.cuit.validator.BindingResultUtil;
@@ -60,7 +60,6 @@ public class CuitUserController{
     @PutMapping
     public CommonResult update(@Valid @RequestBody CuitUser entity,BindingResult results){
         BindingResultUtil.JudegResult(results);
-        entity.setPassWord(passwordEncoder.encode(entity.getPassWord()));
         return userService.update(entity);
     }
 

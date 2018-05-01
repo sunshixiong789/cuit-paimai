@@ -1,6 +1,6 @@
 package cn.edu.cuit.service;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.model.CuitKind;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

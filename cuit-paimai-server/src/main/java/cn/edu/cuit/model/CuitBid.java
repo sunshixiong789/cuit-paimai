@@ -20,11 +20,12 @@ public class CuitBid implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String bidPrice;
-    private int commodityId;
+    private Integer commodityId;
+    private String commodityName;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp insertTime;
-    private int userId;
+    private Integer userId;
 
 }

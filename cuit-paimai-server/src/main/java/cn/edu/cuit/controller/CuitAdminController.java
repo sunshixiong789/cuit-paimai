@@ -1,7 +1,7 @@
 package cn.edu.cuit.controller;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonJsonView;
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonJsonView;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.model.CuitAdmin;
 import cn.edu.cuit.service.CuitAdminService;
 import cn.edu.cuit.validator.BindingResultUtil;

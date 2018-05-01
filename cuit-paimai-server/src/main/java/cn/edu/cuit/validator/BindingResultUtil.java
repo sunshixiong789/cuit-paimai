@@ -1,6 +1,6 @@
 package cn.edu.cuit.validator;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonException;
+import cn.edu.cuit.common.CommonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 

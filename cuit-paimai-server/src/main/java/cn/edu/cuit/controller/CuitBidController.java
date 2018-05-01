@@ -1,6 +1,6 @@
 package cn.edu.cuit.controller;
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.model.CuitBid;
 import cn.edu.cuit.service.CuitBidService;
 import cn.edu.cuit.validator.BindingResultUtil;

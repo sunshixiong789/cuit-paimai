@@ -2,10 +2,7 @@ package cn.edu.cuit.controller;
 import cn.edu.cuit.dao.CuitAuctionAttributeDao;
 import cn.edu.cuit.dao.CuitBidDao;
 import cn.edu.cuit.dao.CuitCommodityDao;
-import cn.edu.cuit.model.CuitBid;
-import cn.edu.cuit.model.CuitBidHistory;
-import cn.edu.cuit.model.CuitCommodity;
-import cn.edu.cuit.model.CuitUser;
+import cn.edu.cuit.model.*;
 import cn.edu.cuit.service.CuitBidHistoryService;
 import cn.edu.cuit.service.CuitDescribeService;
 import cn.edu.cuit.service.CuitUserMoneyService;
@@ -115,7 +112,12 @@ public class CuitViewController {
     @GetMapping(value = "/money")
     public String money(Model model, HttpSession session){
         CuitUser user = userService.findByUsername((String) session.getAttribute("username"));
-        model.addAttribute("money",moneyService.findByUserId(String.valueOf(user.getId())));
+        CuitUserMoney money = moneyService.findByUserId(String.valueOf(user.getId()));
+        if (money == null){
+            model.addAttribute("money",0);
+        }else {
+            model.addAttribute("money",money.getMoney());
+        }
         return "money";
     }
 

@@ -1,8 +1,8 @@
 package cn.edu.cuit.service.impl;
 
 
-import cn.edu.cuit.cuitpaimairesource.common.CommonCRUD;
-import cn.edu.cuit.cuitpaimairesource.common.CommonResult;
+import cn.edu.cuit.common.CommonCRUD;
+import cn.edu.cuit.common.CommonResult;
 import cn.edu.cuit.dao.CuitAuctionAttributeDao;
 import cn.edu.cuit.model.CuitAuctionAttribute;
 import cn.edu.cuit.service.CuitAuctionAttributeService;
@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author sunshixiong on 2018/01/30.

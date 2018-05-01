@@ -30,5 +30,5 @@ server:
 cuit:
   security:
     brower:
-      loginPage: /login_in #/login//login_in
-      loginTpye: JSON #REDIRECT/JSON
+      loginPage: /login #/login//login_in
+      loginTpye: REDIRECT #REDIRECT/JSON
