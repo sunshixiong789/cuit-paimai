@@ -37,6 +37,9 @@ public class BrowserAuthenticationSuccessHandler extends SavedRequestAwareAuthen
                                         Authentication authentication) throws IOException, ServletException {
 
 		if (LoginTpye.JSON.equals(cuitProperties.getBrower().getLoginTpye())) {
+			HttpSession session = request.getSession();
+			User user = (User) authentication.getPrincipal();
+			session.setAttribute("username",user.getUsername());
 			response.setContentType("application/json;charset=UTF-8");
 			CommonResult result = new CommonResult();
 			result.setCode(200);

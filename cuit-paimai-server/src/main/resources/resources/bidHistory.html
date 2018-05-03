@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <h2 style="padding: 75px;font-size: 48px">拍卖历史</h2>
+                <h2 style="padding: 75px;font-size: 48px">成交历史</h2>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
         var $table = $('#cartable');
         $(function () {
             $table.bootstrapTable({
-                url: '/cuitBid?userId='+[[${user.id}]],
+                url: '/cuitBid',
                 method: 'get',
                 pagination: true,
                 pageNumber: 1,

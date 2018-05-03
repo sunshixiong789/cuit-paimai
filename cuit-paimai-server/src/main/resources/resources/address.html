@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户详情</title>
+</head>
+
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link href="layui/css/layui.css" rel="stylesheet">
+<body>
+<div data-th-insert="~{user_info :: cuit_userInfo_header}"></div>
+<div style="background:#888888;height: 150px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <h2 style="padding: 75px;font-size: 48px">地址管理</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div data-th-insert="~{user_info :: cuit_menu}"></div>
+    <div class="col-md-6">
+        <form class="layui-form" action="" style="padding-top:30px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">收货地址</label>
+                <div class="layui-input-inline">
+                    <select name="quiz1" lay-verify="required" lay-search="">
+                        <option value="">请选择省</option>
+                        <option value="浙江" selected="">浙江省</option>
+                        <option value="你的工号">江西省</option>
+                        <option value="四川">四川</option>
+                        <option value="你最喜欢的老师">福建省</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="quiz2" lay-verify="required" lay-search="">
+                        <option value="">请选择市</option>
+                        <option value="杭州">杭州</option>
+                        <option value="宁波" disabled="">宁波</option>
+                        <option value="温州">温州</option>
+                        <option value="成都" selected="">成都</option>
+                        <option value="温州">台州</option>
+                        <option value="温州">绍兴</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="quiz3" lay-verify="required" lay-search="">
+                        <option value="">请选择县/区</option>
+                        <option value="西湖区">西湖区</option>
+                        <option value="余杭区">余杭区</option>
+                        <option value="余杭区" selected="">双流县</option>
+                        <option value="拱墅区">临安市</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="address" lay-verify="title" autocomplete="off" value="成都信息工程大学" placeholder="详细地址" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <button class="layui-btn" id="saveButton" lay-submit lay-filter="formDemo">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<script src="jquery/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="layui/layui.js"></script>
+<script data-th-inline="javascript">
+    layui.use(['layer', 'form', 'element', 'layedit', 'laydate'], function () {
+        var element = layui.element, form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        //一些事件监听
+        element.on('tab(demo)', function (data) {
+            console.log(data);
+        });
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $("#saveButton").click(function () {
+                layer.alert("保存成功");
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

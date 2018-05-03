@@ -292,7 +292,7 @@
             });
         }
         else {
-            layer.confirm('你未提交定金！是否提交定金？', {
+            layer.confirm('你未提交定金！是否提交'+[[${attribute.cashDeposit}]]+'定金？', {
                 btn: ['确定', '取消']
             }, function () {
                 var params = {

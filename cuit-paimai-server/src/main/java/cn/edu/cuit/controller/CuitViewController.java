@@ -105,7 +105,9 @@ public class CuitViewController {
         return "single-product";
     }
     @GetMapping(value = "/car")
-    public String car(){
+    public String car(Model model, HttpSession session){
+        CuitUser user = userService.findByUsername((String) session.getAttribute("username"));
+        model.addAttribute("user",user);
         return "car";
     }
 
@@ -113,10 +115,11 @@ public class CuitViewController {
     public String money(Model model, HttpSession session){
         CuitUser user = userService.findByUsername((String) session.getAttribute("username"));
         CuitUserMoney money = moneyService.findByUserId(String.valueOf(user.getId()));
+        model.addAttribute("user",user);
         if (money == null){
-            model.addAttribute("money",0);
+            model.addAttribute("money",new CuitUserMoney());
         }else {
-            model.addAttribute("money",money.getMoney());
+            model.addAttribute("money",money);
         }
         return "money";
     }
@@ -125,8 +128,17 @@ public class CuitViewController {
      * @return
      */
     @GetMapping(value = "/message")
-    public String bidHistory(){
+    public String message(){
         return "message";
+    }
+
+    @GetMapping(value = "/address")
+    public String address(){
+        return "address";
+    }
+    @GetMapping(value = "/bidhistory")
+    public String bidhistory(){
+        return "bidhistory";
     }
 
 }
