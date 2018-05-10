@@ -19,8 +19,8 @@
                     <div class="shopping-item">
                         <form class="form-inline">
                             <div class="form-group">
-                                <label for="foodName" class="sr-only">商品名称</label>
-                                <input type="text" class="form-control" id="foodName" placeholder="商品名称"
+                                <label for="atuhionName" class="sr-only">商品名称</label>
+                                <input type="text" class="form-control" id="atuhionName" placeholder="商品名称"
                                        style="width: 350px">
                             </div>
                             <button type="button" class="btn btn-primary" id="searchButton">搜索</button>
@@ -45,9 +45,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="/">首页</a></li>
                         <li id="active1"><a href="/shop">商品</a></li>
-                        <li id="active3"><a href="">限时拍卖</a></li>
-                        <li id="active4"><a href="">预展/历史</a></li>
-                        <li id="active5"><a href="#">帮助</a></li>
+                        <li id="active3"><a href="/timeLimt">限时拍卖</a></li>
+                        <li id="active5"><a href="/help">帮助</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,8 +54,7 @@
     </div>
     <script data-th-inline="javascript">
         $("#searchButton").click(function(){
-            alert([[${session.username}]]);
-            /*window.location.href = '/shop';*/
+            window.location.href='http://localhost:8081/shop?name='+$('#atuhionName').val();
         });
     </script>
 </div>

@@ -28,4 +28,5 @@ public class CuitPicture implements Serializable {
 	private String cuitCommodityId;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Timestamp insertTime;
+	private String pictureUuid;
 }

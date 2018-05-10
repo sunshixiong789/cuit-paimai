@@ -28,13 +28,11 @@ public class CuitFileController {
     /**
      * 文件上传
      * @param file
-     * @param id
-     * @param request
      * @throws IOException
      */
     @PostMapping(value = "/upload")
     @ResponseBody
-    public void uploadFile(MultipartFile[] file, String id, HttpServletRequest request) throws IOException {
+    public void uploadFile(MultipartFile[] file,String name) throws IOException {
 
         for (int i = 0; i < file.length; i++) {
             if (file[i] != null) {
@@ -43,26 +41,34 @@ public class CuitFileController {
                     //上传文件后缀名
                     String suffix = file[i].getOriginalFilename().substring(file[i].getOriginalFilename().lastIndexOf("."));
                     String loadFileName = UUID.randomUUID() + suffix;
-                    File loadfile = new File("E:/usr/local/cuit" + File.separator + id + File.separator + loadFileName);
-                    File uploadfile = new File("E:/usr/local/cuit" + File.separator + id );
+                    File loadfile = new File("E:/usr/local/cuit" + File.separator + name + File.separator + loadFileName);
+                    File uploadfile = new File("E:/usr/local/cuit" + File.separator + name );
                     if(!uploadfile.exists() && !uploadfile.isDirectory()) {
                         uploadfile.mkdirs();
                     }
                     file[i].transferTo(loadfile);
                     CuitPicture cuitPicture = new CuitPicture();
-                    cuitPicture.setCuitCommodityId(id);
                     cuitPicture.setPictureType(suffix);
+                    cuitPicture.setPictureUuid(name);
                     cuitPicture.setPictureName(loadFileName);
                     cuitPictureService.add(cuitPicture);
                 }
             }
         }
     }
+
+    /**
+     * 图片下载
+     * @param fileName
+     * @param name
+     * @param response
+     * @throws UnsupportedEncodingException
+     */
     @GetMapping(value = "/download")
-    public void download(String fileName,Integer id, HttpServletResponse response) throws UnsupportedEncodingException {
+    public void download(String fileName,String name, HttpServletResponse response) throws UnsupportedEncodingException {
         String path = "E:/usr/local/cuit";
 
-        File file = new File(path + File.separator + id + File.separator + fileName);
+        File file = new File(path + File.separator + name + File.separator + fileName);
 
         response.reset();
         response.setHeader("Content-Disposition",
@@ -70,8 +76,7 @@ public class CuitFileController {
         response.addHeader("Content-Length", "" + file.length());
         response.setContentType("application/octet-stream;charset=UTF-8");
         try {
-            InputStream inputStream = new FileInputStream(
-                    new File("/usr/local/cuit" + File.separator + id + File.separator + fileName));
+            InputStream inputStream = new FileInputStream(file);
 
             OutputStream outputStream = response.getOutputStream();
             IOUtils.copy(inputStream,outputStream);

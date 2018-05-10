@@ -80,13 +80,13 @@
                         <div class="col-sm-6">
                             <div class="product-inner">
                                 <h2 class="product-name" data-th-text="${commodity.name}">Sony Smart TV - 2015</h2>
-                                <div class="product-inner-price">
+                                <div class="product-inner-price" style="display: none">
                                     <span>当前价格:</span>
                                     <ins data-th-text="${commodity.presentPrice}">$700.00</ins>
                                 </div>
                                 <div class="product-inner-price">
                                     <span>结束时间:</span>
-                                    <ins data-th-text="${commodity.endTime}">$700.00</ins>
+                                    <ins data-th-text="${commodity.endTime}" style="font-size: 24px;background-color: #dd0b1e">$700.00</ins>
                                 </div>
                                 <form action="" class="cart">
                                     <div class="quantity">
@@ -239,87 +239,95 @@
 
     function bidCommodity() {
         if ([[${bid}]] == true) {
-            layer.confirm('您确定出价？', {
-                btn: ['确定', '取消'] //按钮
-            }, function () {
-                var params = {
-                    cuitCommodityId: [[${commodity.id}]],
-                    cuitUserName: [[${user.name}]],
-                    endPrice: $("#bid_price").val(),
-                    price: [[${commodity.presentPrice}]],
-                    type: "1",
-                    userId: [[${user.id}]]
-                };
-                $.ajax({
-                    type: "post",
-                    async: false,
-                    url: "/cuitBidHistory",
-                    data: JSON.stringify(params),
-                    contentType: 'application/json',
-                    dataType: "json",
-                    success: function (result, status, xhr) {
-                        layer.confirm('出价成功',{
-                            btn: ['确定', '关闭']
-                        },function () {
-                            window.location.reload();
-                        });
-                    },
-                    error: function (xhr, status, error) {
-                        layer.confirm('出价失败:' + xhr.responseText);
-                    }
+            if(new Date([[${commodity.endTime}]]) < new Date()){
+                layer.alert("此商品拍卖时间已经到了");
+            }else {
+                layer.confirm('您确定出价？', {
+                    btn: ['确定', '取消'] //按钮
+                }, function () {
+                    var params = {
+                        cuitCommodityId: [[${commodity.id}]],
+                        cuitUserName: [[${user.name}]],
+                        endPrice: $("#bid_price").val(),
+                        price: [[${commodity.presentPrice}]],
+                        type: "1",
+                        userId: [[${user.id}]]
+                    };
+                    $.ajax({
+                        type: "post",
+                        async: false,
+                        url: "/cuitBidHistory",
+                        data: JSON.stringify(params),
+                        contentType: 'application/json',
+                        dataType: "json",
+                        success: function (result, status, xhr) {
+                            layer.confirm('出价成功',{
+                                btn: ['确定', '关闭']
+                            },function () {
+                                window.location.reload();
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            layer.confirm('出价失败:' + xhr.responseText);
+                        }
+                    });
+                    $.ajax({
+                        type: "post",
+                        async: false,
+                        url: "/cuitCommodity/updateById",
+                        data: {
+                            presentPrice:$("#bid_price").val(),
+                            id:[[${commodity.id}]]
+                        },
+                        dataType: "json",
+                        success: function (result, status, xhr) {
+                            console.log("修改价格成功");
+                        },
+                        error: function (xhr, status, error) {
+                            console.log("修改价格成功"+ xhr.responseText);
+                        }
+                    });
+                }, function () {
+                    layer.msg('也可以这样', {
+                        time: 20000, //20s后自动关闭
+                        btn: ['明白了', '知道了']
+                    });
                 });
-                $.ajax({
-                    type: "post",
-                    async: false,
-                    url: "/cuitCommodity/updateById",
-                    data: {
-                        presentPrice:$("#bid_price").val(),
-                        id:[[${commodity.id}]]
-                    },
-                    dataType: "json",
-                    success: function (result, status, xhr) {
-                        console.log("修改价格成功");
-                    },
-                    error: function (xhr, status, error) {
-                        console.log("修改价格成功"+ xhr.responseText);
-                    }
-                });
-            }, function () {
-                layer.msg('也可以这样', {
-                    time: 20000, //20s后自动关闭
-                    btn: ['明白了', '知道了']
-                });
-            });
+            }
         }
         else {
-            layer.confirm('你未提交定金！是否提交'+[[${attribute.cashDeposit}]]+'定金？', {
-                btn: ['确定', '取消']
-            }, function () {
-                var params = {
-                    bidPrice: [[${attribute.cashDeposit}]],
-                    commodityId: [[${commodity.id}]],
-                    commodityName: [[${commodity.name}]],
-                    userId: [[${user.id}]]
-                };
-                $.ajax({
-                    type: "post",
-                    async: false,
-                    url: "/cuitBid",
-                    data: JSON.stringify(params),
-                    contentType: 'application/json',
-                    dataType: "json",
-                    success: function (result, status, xhr) {
-                        layer.confirm('成功提交保证金',{
-                            btn: ['确定', '关闭']
-                        },function () {
-                            window.location.reload();
-                        });
-                    },
-                    error: function (xhr, status, error) {
-                        layer.alert('保证金提交失败:' + xhr.responseText);
-                    }
+            if(new Date([[${commodity.endTime}]]) < new Date()){
+                layer.alert("此商品拍卖时间已经到了");
+            }else {
+                layer.confirm('你未提交定金！是否提交'+[[${attribute.cashDeposit}]]+'定金？', {
+                    btn: ['确定', '取消']
+                }, function () {
+                    var params = {
+                        bidPrice: [[${attribute.cashDeposit}]],
+                        commodityId: [[${commodity.id}]],
+                        commodityName: [[${commodity.name}]],
+                        userId: [[${user.id}]]
+                    };
+                    $.ajax({
+                        type: "post",
+                        async: false,
+                        url: "/cuitBid",
+                        data: JSON.stringify(params),
+                        contentType: 'application/json',
+                        dataType: "json",
+                        success: function (result, status, xhr) {
+                            layer.confirm('成功提交保证金',{
+                                btn: ['确定', '关闭']
+                            },function () {
+                                window.location.reload();
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            layer.alert('保证金提交失败:' + xhr.responseText);
+                        }
+                    });
                 });
-            });
+            }
         }
     }
     $("#fankuitijiao").click(function () {

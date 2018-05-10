@@ -27,8 +27,10 @@ public class CuitCommodity implements Serializable {
 	private String presentPrice;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Timestamp insertTime;
+	private Timestamp startTime;
 	private String status;
 	private Integer cuitKindId;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Timestamp endTime;
+	private String pictureUuid;
 }

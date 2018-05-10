@@ -48,7 +48,7 @@
         var $table = $('#cartable');
         $(function () {
             $table.bootstrapTable({
-                url: '/cuitBid',
+                url: '/cuitBid?userId='+[[${user.id}]]+'&type=2',
                 method: 'get',
                 pagination: true,
                 pageNumber: 1,

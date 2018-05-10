@@ -49,5 +49,5 @@ public interface CuitDescribeService {
      * @param id
      * @return
      */
-    List<CuitDescribe> listByCommodityId(Integer id);
+    List<CuitDescribe> listByCommodityUuid(Integer id);
 }

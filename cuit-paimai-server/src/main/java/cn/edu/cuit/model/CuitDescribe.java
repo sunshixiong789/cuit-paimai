@@ -20,7 +20,19 @@ public class CuitDescribe implements Serializable {
 	@Id
 	@GeneratedValue
    	private Integer id;
-	private String name;
-	private String describe;
-	private Integer cuitCommodityId;
+	private String commodityUuid;
+	private String taskNumber;
+	private String charity;
+	private String style;
+	private String grain;
+	private String weight;
+	private String appraisalMarks;
+	private String identification;
+	private String orea;
+	private String certificationAuthority;
+	private String authorityWebsite;
+	private String reportNumber;
+	private String kindof;
+	private String orientation;
+	private String appearance;
 }

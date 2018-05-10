@@ -8,9 +8,7 @@ import cn.edu.cuit.service.CuitDescribeService;
 import cn.edu.cuit.service.CuitUserMoneyService;
 import cn.edu.cuit.service.CuitUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -60,15 +58,20 @@ public class CuitViewController {
     }
     @GetMapping("/login")
     public String login(Model model,String error){
-        if ("false".equals(error)){
+        String key = "false";
+        if (key.equals(error)){
             model.addAttribute("error",error);
             model.addAttribute("login_message","你输入的登录信息有错");
         }
         return "loginin";
     }
     @GetMapping("/shop")
-    public String shop(Model model){
-        model.addAttribute("commoditys",cuitCommodityDao.findAll());
+    public String shop(Model model,String name){
+        CuitCommodity cuitCommodity = new CuitCommodity();
+        cuitCommodity.setName(name);
+        ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("name",ExampleMatcher.GenericPropertyMatchers.contains());
+        Example example = Example.of(cuitCommodity,matcher);
+        model.addAttribute("commoditys",cuitCommodityDao.findAll(example));
         return "shop";
     }
 
@@ -81,14 +84,22 @@ public class CuitViewController {
     public String userinfo(){
         return "user_info";
     }
+
+    /**
+     * 展示商品详细信息
+     * @param model
+     * @param id
+     * @param session
+     * @return
+     */
     @GetMapping(value = "/single-product")
     public String singleProduct(Model model,Integer id,HttpSession session){
         Optional commodity = cuitCommodityDao.findById(id);
         CuitCommodity cuitCommodity = (CuitCommodity) commodity.get();
         model.addAttribute("commodity",cuitCommodity);
         model.addAttribute("attribute",attributeDao.findByCuitCommodityId(cuitCommodity.getId()));
-        model.addAttribute("describes",describeService.listByCommodityId(id));
-        Pageable pageable = new PageRequest(0,10, Sort.Direction.DESC,"endTime");
+        model.addAttribute("describes",describeService.listByCommodityUuid(id));
+        Pageable pageable = PageRequest.of(0,10, Sort.Direction.DESC,"endTime");
         CuitBidHistory bidHistory = new CuitBidHistory();
         bidHistory.setCuitCommodityId(String.valueOf(id));
         model.addAttribute("bidHistory",bidHistoryService.queryPage(bidHistory,pageable));
@@ -137,8 +148,24 @@ public class CuitViewController {
         return "address";
     }
     @GetMapping(value = "/bidhistory")
-    public String bidhistory(){
+    public String bidhistory(Model model, HttpSession session){
+        CuitUser user = userService.findByUsername((String) session.getAttribute("username"));
+        model.addAttribute("user",user);
         return "bidhistory";
+    }
+
+    @GetMapping(value = "/timeLimt")
+    public String timeLimt(Model model){
+        CuitCommodity cuitCommodity = new CuitCommodity();
+        cuitCommodity.setStatus("2");
+        Example example = Example.of(cuitCommodity);
+        model.addAttribute("commoditys",cuitCommodityDao.findAll(example));
+        return "timeLimt";
+    }
+
+    @GetMapping(value = "/help")
+    public String help(){
+        return "help";
     }
 
 }

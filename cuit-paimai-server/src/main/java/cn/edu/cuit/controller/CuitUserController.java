@@ -60,6 +60,7 @@ public class CuitUserController{
     @PutMapping
     public CommonResult update(@Valid @RequestBody CuitUser entity,BindingResult results){
         BindingResultUtil.JudegResult(results);
+        entity.setPassWord(passwordEncoder.encode(entity.getPassWord()));
         return userService.update(entity);
     }
 

@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("cuitAdmin")
+@RequestMapping(value = "cuitAdmin")
 public class CuitAdminController {
 
 	@Autowired

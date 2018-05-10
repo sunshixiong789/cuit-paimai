@@ -53,7 +53,7 @@ public class CuitDescribeServiceImpl implements CuitDescribeService {
     }
 
     @Override
-    public List<CuitDescribe> listByCommodityId(Integer id) {
-        return describeDao.findByCuitCommodityId(id);
+    public List<CuitDescribe> listByCommodityUuid(Integer id) {
+        return describeDao.findByCommodityUuid(id);
     }
 }
