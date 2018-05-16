@@ -1,5 +1,6 @@
 package cn.edu.cuit.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -29,6 +30,7 @@ public class CuitCommodityHistory implements Serializable {
 
     private String stare;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp buyTime;
 
     private String sellerName;

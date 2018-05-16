@@ -48,7 +48,7 @@
         var $table = $('#cartable');
         $(function () {
             $table.bootstrapTable({
-                url: '/cuitBid?userId='+[[${user.id}]]+'&type=1',
+                url: '/cuitBid',
                 method: 'get',
                 pagination: true,
                 pageNumber: 1,
@@ -62,6 +62,8 @@
                 dataField: 'content',//后台数据字段
                 queryParams: function (params) {
                     var queryParams = {
+                        userId: [[${user.id}]],
+                        type: 1,
                         size: params.limit,
                         page: params.offset,
                     };

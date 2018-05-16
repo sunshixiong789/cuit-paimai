@@ -48,7 +48,7 @@
         var $table = $('#cartable');
         $(function () {
             $table.bootstrapTable({
-                url: '/cuitBid?userId='+[[${user.id}]]+'&type=2',
+                url: '/cuitCommodityHistory',
                 method: 'get',
                 pagination: true,
                 pageNumber: 1,
@@ -64,6 +64,7 @@
                     var queryParams = {
                         size: params.limit,
                         page: params.offset,
+                        sellerName: [[${user.userName}]]
                     };
                     return queryParams;
                 },
@@ -75,22 +76,33 @@
                     {
                         field: 'commodityName',
                         title: '商品名称',
-                        align: 'left',
-                        width: 200
+                        align: 'left'
                     },
                     {
-                        field: 'bidPrice',
+                        field: 'price',
                         title: '商品价格',
                         align: 'left',
                         formatter: function (value, row, index) {
-                            return '￥'+row.bidPrice
+                            return '￥'+row.price
                         }
                     },
                     {
-                        field: 'insertTime',
-                        title: '时间',
+                        field: 'baozhengjing',
+                        title: '保证金',
                         align: 'left',
-                        width: 200
+                        formatter: function (value, row, index) {
+                            return '￥'+row.baozhengjing
+                        }
+                    },
+                    {
+                        field: 'buyTime',
+                        title: '购买时间',
+                        align: 'left'
+                    },
+                    {
+                        field: 'stare',
+                        title: '是否成功',
+                        align: 'left'
                     }
                 ],
                 onClickRow: function (row, $element, field) {
@@ -107,7 +119,7 @@
                         $.ajax({
                             type: "delete",
                             async: false,
-                            url: "/cuitBid",
+                            url: "/cuitCommodityHistory",
                             data: JSON.stringify({
                                 id:messagerow[i].id
                             }),

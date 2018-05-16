@@ -2,11 +2,9 @@ package cn.edu.cuit.controller;
 import cn.edu.cuit.dao.CuitAuctionAttributeDao;
 import cn.edu.cuit.dao.CuitBidDao;
 import cn.edu.cuit.dao.CuitCommodityDao;
+import cn.edu.cuit.dao.CuitDescribeDao;
 import cn.edu.cuit.model.*;
-import cn.edu.cuit.service.CuitBidHistoryService;
-import cn.edu.cuit.service.CuitDescribeService;
-import cn.edu.cuit.service.CuitUserMoneyService;
-import cn.edu.cuit.service.CuitUserService;
+import cn.edu.cuit.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
@@ -17,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +35,8 @@ public class CuitViewController {
     private CuitAuctionAttributeDao attributeDao;
     @Autowired
     private CuitBidDao bidDao;
+    @Autowired
+    private CuitDescribeDao describeDao;
 
     @Autowired
     private CuitUserService userService;
@@ -43,13 +44,16 @@ public class CuitViewController {
     private CuitUserMoneyService moneyService;
 
     @Autowired
-    private CuitDescribeService describeService;
+    private CuitPictureService pictureService;
     @Autowired
     private CuitBidHistoryService bidHistoryService;
 
     @GetMapping
     public String index(Model model,@AuthenticationPrincipal UserDetails user){
-        model.addAttribute("commoditys",cuitCommodityDao.findAll());
+        CuitCommodity cuitCommodity = new CuitCommodity();
+        cuitCommodity.setStatus("1");
+        Example example = Example.of(cuitCommodity);
+        model.addAttribute("commoditys",cuitCommodityDao.findAll(example));
         return "index";
     }
     @GetMapping("/user/view")
@@ -57,7 +61,7 @@ public class CuitViewController {
         return "user_info";
     }
     @GetMapping("/login")
-    public String login(Model model,String error){
+    public String login(Model model, String error, HttpServletResponse response){
         String key = "false";
         if (key.equals(error)){
             model.addAttribute("error",error);
@@ -69,6 +73,7 @@ public class CuitViewController {
     public String shop(Model model,String name){
         CuitCommodity cuitCommodity = new CuitCommodity();
         cuitCommodity.setName(name);
+        cuitCommodity.setStatus("1");
         ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("name",ExampleMatcher.GenericPropertyMatchers.contains());
         Example example = Example.of(cuitCommodity,matcher);
         model.addAttribute("commoditys",cuitCommodityDao.findAll(example));
@@ -97,8 +102,11 @@ public class CuitViewController {
         Optional commodity = cuitCommodityDao.findById(id);
         CuitCommodity cuitCommodity = (CuitCommodity) commodity.get();
         model.addAttribute("commodity",cuitCommodity);
-        model.addAttribute("attribute",attributeDao.findByCuitCommodityId(cuitCommodity.getId()));
-        model.addAttribute("describes",describeService.listByCommodityUuid(id));
+        model.addAttribute("attribute",attributeDao.findByCommodityUuid(cuitCommodity.getPictureUuid()));
+        model.addAttribute("describe",describeDao.findByCommodityUuid(cuitCommodity.getPictureUuid()));
+        CuitPicture picture = new CuitPicture();
+        picture.setPictureUuid(cuitCommodity.getPictureUuid());
+        model.addAttribute("picture",pictureService.queryList(picture));
         Pageable pageable = PageRequest.of(0,10, Sort.Direction.DESC,"endTime");
         CuitBidHistory bidHistory = new CuitBidHistory();
         bidHistory.setCuitCommodityId(String.valueOf(id));

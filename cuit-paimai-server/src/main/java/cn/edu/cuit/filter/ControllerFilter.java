@@ -23,9 +23,9 @@ public class ControllerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.info("过滤器开始时间：");
-        long start = new Date().getTime();
+        long start = System.currentTimeMillis();
         chain.doFilter(request,response);
-        log.info("time filter:"+(new Date().getTime()-start));
+        log.info("time filter:"+(System.currentTimeMillis()-start));
         log.info("过滤器结束");
     }
 

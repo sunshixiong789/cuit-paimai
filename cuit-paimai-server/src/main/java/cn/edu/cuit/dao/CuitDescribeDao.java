@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface CuitDescribeDao extends JpaRepository<CuitDescribe,Integer> {
 
-    public List<CuitDescribe> findByCommodityUuid(Integer id);
+    CuitDescribe findByCommodityUuid(String id);
 }

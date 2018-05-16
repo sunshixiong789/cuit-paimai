@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -54,10 +55,10 @@ public class CuitCommodityServiceImpl implements CuitCommodityService {
 
     @Override
     @Transactional
-    public CommonResult updateById(String presentPrice, Integer id) {
+    public CommonResult updateById(String presentPrice, Integer id,String buyUserId,String buyUserName) {
         CommonResult commonResult = new CommonResult();
         try {
-            commodityDao.updateById(presentPrice,id);
+            commodityDao.updateById(presentPrice,id,buyUserId,buyUserName);
             commonResult.setCode(200);
             commonResult.setMessage("修改价格成功");
         }catch (Exception e){
@@ -65,5 +66,10 @@ public class CuitCommodityServiceImpl implements CuitCommodityService {
             commonResult.setMessage("修改价格失败");
         }
         return commonResult;
+    }
+
+    @Override
+    public Page<CuitCommodity> findByEndTimeBefore(Pageable pageable) {
+        return commodityDao.findByEndTimeBefore(new Timestamp(System.currentTimeMillis()),pageable);
     }
 }

@@ -27,12 +27,13 @@ public class CuitFileController {
 
     /**
      * 文件上传
+     *
      * @param file
      * @throws IOException
      */
     @PostMapping(value = "/upload")
     @ResponseBody
-    public void uploadFile(MultipartFile[] file,String name) throws IOException {
+    public void uploadFile(MultipartFile[] file, String name) throws IOException {
 
         for (int i = 0; i < file.length; i++) {
             if (file[i] != null) {
@@ -42,8 +43,8 @@ public class CuitFileController {
                     String suffix = file[i].getOriginalFilename().substring(file[i].getOriginalFilename().lastIndexOf("."));
                     String loadFileName = UUID.randomUUID() + suffix;
                     File loadfile = new File("E:/usr/local/cuit" + File.separator + name + File.separator + loadFileName);
-                    File uploadfile = new File("E:/usr/local/cuit" + File.separator + name );
-                    if(!uploadfile.exists() && !uploadfile.isDirectory()) {
+                    File uploadfile = new File("E:/usr/local/cuit" + File.separator + name);
+                    if (!uploadfile.exists() && !uploadfile.isDirectory()) {
                         uploadfile.mkdirs();
                     }
                     file[i].transferTo(loadfile);
@@ -59,13 +60,14 @@ public class CuitFileController {
 
     /**
      * 图片下载
+     *
      * @param fileName
      * @param name
      * @param response
      * @throws UnsupportedEncodingException
      */
     @GetMapping(value = "/download")
-    public void download(String fileName,String name, HttpServletResponse response) throws UnsupportedEncodingException {
+    public void download(String fileName, String name, HttpServletResponse response) throws UnsupportedEncodingException {
         String path = "E:/usr/local/cuit";
 
         File file = new File(path + File.separator + name + File.separator + fileName);
@@ -79,10 +81,31 @@ public class CuitFileController {
             InputStream inputStream = new FileInputStream(file);
 
             OutputStream outputStream = response.getOutputStream();
-            IOUtils.copy(inputStream,outputStream);
+            IOUtils.copy(inputStream, outputStream);
             outputStream.flush();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @GetMapping(value = "/downloadByName")
+    public void downloadByName(String name, HttpServletResponse response) throws IOException {
+        String path = "E:/usr/local/cuit";
+
+        File file = new File(path + File.separator + name + File.separator);
+        String[] filelist = file.list();
+        File fileout = new File(path + File.separator + name + File.separator + filelist[1]);
+
+        response.reset();
+        response.setHeader("Content-Disposition",
+                "attachment; filename=\"" + new String(filelist[1].getBytes("gbk"), "iso-8859-1") + "\"");
+        response.addHeader("Content-Length", "" + fileout.length());
+        response.setContentType("application/octet-stream;charset=UTF-8");
+
+        InputStream inputStream = new FileInputStream(fileout);
+
+        OutputStream outputStream = response.getOutputStream();
+        IOUtils.copy(inputStream, outputStream);
+        outputStream.flush();
     }
 }

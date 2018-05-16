@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface CuitBidDao extends JpaRepository<CuitBid,Integer> {
 
-    public List<CuitBid> findByCommodityIdAndUserId(Integer commodityId,Integer userId);
+    List<CuitBid> findByCommodityIdAndUserId(Integer commodityId,Integer userId);
 }

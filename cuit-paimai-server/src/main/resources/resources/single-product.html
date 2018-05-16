@@ -68,12 +68,12 @@
                             <div class="product-images">
                                 <div class="product-main-img">
                                     <img src="img/product-2.jpg" alt=""
-                                         data-th-src="@{/cuitfile/download(fileName=${commodity.picture},id=1)}">
+                                         data-th-src="@{/cuitfile/downloadByName(name=${commodity.pictureUuid})}">
                                 </div>
                                 <div class="product-gallery">
-                                    <img src="img/product-thumb-1.jpg" alt="">
-                                    <img src="img/product-thumb-2.jpg" alt="">
-                                    <img src="img/product-thumb-3.jpg" alt="">
+                                    <div data-th-each="list : ${picture}" style="display: inline">
+                                        <img width="400" height="600" data-th-src="@{/cuitfile/download(name=${list.pictureUuid},fileName=${list.pictureName})}" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                                           style="font-size: small;color: #5e5e5e"></span>
                                 </form>
                                 <div class="row" style="margin-bottom: 150px">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <div class="row attrabute">
                                             起拍价：<span data-th-text="'￥'+${attribute.upsetPrice}">无</span>
                                         </div>
@@ -110,7 +110,7 @@
                                             佣金：<span data-th-text="'￥'+${attribute.commission}">无</span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <div class="row attrabute">
                                             加价幅度：<span data-th-text="'￥'+${attribute.bidIncrement}">无</span>
                                         </div>
@@ -118,10 +118,12 @@
                                             延时周期：<span data-th-text="${attribute.delayPeriod}+'h'">无</span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <div class="row attrabute">
                                             保证金：<span data-th-text="'￥'+${attribute.cashDeposit}">无</span>
                                         </div>
+                                    </div>
+                                    <div class="col-sm-5">
                                         <div class="row attrabute">
                                             保留价格：<span data-th-text="'￥'+${attribute.reservePrice}">无</span>
                                         </div>
@@ -138,9 +140,61 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="home">
                                             <div class="row">
-                                                <div class="col-sm-6 attrabute" data-th-each="describe : ${describes}">
-                                                    <span data-th-text="${describe.name}+':'">描述：</span>
-                                                    <span data-th-text="${describe.describe}">无</span>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>任务编号：</span>
+                                                    <span data-th-text="${describe.taskNumber}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>净度：</span>
+                                                    <span data-th-text="${describe.charity}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>款式：</span>
+                                                    <span data-th-text="${describe.style}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>质地：</span>
+                                                    <span data-th-text="${describe.grain}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>重量：</span>
+                                                    <span data-th-text="${describe.weight}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>鉴定标识：</span>
+                                                    <span data-th-text="${describe.appraisalMarks}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>鉴定类别：</span>
+                                                    <span data-th-text="${describe.identification}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>认证标识：</span>
+                                                    <span data-th-text="${describe.orea}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>鉴定证书机构名称：</span>
+                                                    <span data-th-text="${describe.certificationAuthority}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>鉴定证书机构网站：</span>
+                                                    <span data-th-text="${describe.authorityWebsite}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>鉴定证书编号：</span>
+                                                    <span data-th-text="${describe.reportNumber}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>品种：</span>
+                                                    <span data-th-text="${describe.kindof}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>外观造型：</span>
+                                                    <span data-th-text="${describe.appearance}">无</span>
+                                                </div>
+                                                <div class="col-sm-6 attrabute">
+                                                    <span>产状：</span>
+                                                    <span data-th-text="${describe.orientation}">无</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -184,8 +238,8 @@
                         出价记录
                     </button>
                     <button style="width:100%" type="button" data-th-each="list : ${bidHistory.content}"
-                            class="list-group-item list-group-item-action">
-                        <span data-th-text="${list.cuitUserName}+'——'+${list.endPrice}+'￥'+'——'+${list.endTime}">没有出价记录</span>
+                            class="list-group-item list-group-item-action" data-th-unless="${#lists.isEmpty(bidHistory.content)}">
+                        <span data-th-text="${list.cuitUserName}+'——'+${list.endPrice}+'￥'+'——'+${list.endTime}" data-th-unless="${#lists.isEmpty(bidHistory.content)}">没有出价记录</span>
                     </button>
                 </div>
             </div>
@@ -224,8 +278,6 @@
 <script type="text/javascript" src="js/bxslider.min.js"></script>
 <script type="text/javascript" src="js/script.slider.js"></script>
 <script type="text/javascript" src="js/menulist.js"></script>
-<!--my js-->
-<script type="text/javascript" src="js/index.js"></script>
 <!-- Main Script -->
 <script src="js/main.js"></script>
 <!-- Bootstrap JS form CDN -->
@@ -247,7 +299,7 @@
                 }, function () {
                     var params = {
                         cuitCommodityId: [[${commodity.id}]],
-                        cuitUserName: [[${user.name}]],
+                        cuitUserName: [[${user.userName}]],
                         endPrice: $("#bid_price").val(),
                         price: [[${commodity.presentPrice}]],
                         type: "1",
@@ -277,7 +329,9 @@
                         url: "/cuitCommodity/updateById",
                         data: {
                             presentPrice:$("#bid_price").val(),
-                            id:[[${commodity.id}]]
+                            id:[[${commodity.id}]],
+                            buyUserId: [[${user.id}]],
+                            buyUserName: [[${user.name}]]
                         },
                         dataType: "json",
                         success: function (result, status, xhr) {
@@ -306,7 +360,8 @@
                         bidPrice: [[${attribute.cashDeposit}]],
                         commodityId: [[${commodity.id}]],
                         commodityName: [[${commodity.name}]],
-                        userId: [[${user.id}]]
+                        userId: [[${user.id}]],
+                        type:'1'
                     };
                     $.ajax({
                         type: "post",

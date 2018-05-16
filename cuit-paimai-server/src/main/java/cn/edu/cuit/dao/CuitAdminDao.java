@@ -18,11 +18,21 @@ public interface CuitAdminDao extends JpaRepository<CuitAdmin,Integer>/*,JpaSpec
      * @param name
      * @return
      */
-    public CuitAdmin findByName(String name);
+    CuitAdmin findByName(String name);
 
+    /**
+     * 通过ID查找
+     * @param id
+     * @return
+     */
     @Query(value = "select u from CuitAdmin u where u.id = ?1")
-    public CuitAdmin queryOne(Integer id);
+    CuitAdmin queryOne(Integer id);
 
+    /**
+     * 关联查找
+     * @param example
+     * @return
+     */
     @Query(value = "SELECT u.name,u.pass_word,u.type,p.bid_increment,p.auction_organization,p.cuit_commodity_id FROM cuit_admin u,cuit_auction_attribute p",nativeQuery = true)
-    public List<Object[]> querytest(Example<CuitAdmin> example);
+    List<Object[]> querytest(Example<CuitAdmin> example);
 }

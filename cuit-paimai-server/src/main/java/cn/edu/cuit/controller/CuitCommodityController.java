@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +66,7 @@ public class CuitCommodityController {
      * @param pageable
      * @return
      */
+    /*@PreAuthorize("hasRole('ROLE_ADMIN')")*/
     @GetMapping
     public Page<CuitCommodity> query(CuitCommodity entity
             , @PageableDefault(size = 10,sort = "id"
@@ -83,7 +85,13 @@ public class CuitCommodityController {
     }
 
     @PostMapping(value = "/updateById")
-    public CommonResult updateById(String presentPrice, Integer id){
-        return commodityService.updateById(presentPrice,id);
+    public CommonResult updateById(String presentPrice, Integer id,String buyUserId,String buyUserName){
+        return commodityService.updateById(presentPrice,id,buyUserId,buyUserName);
+    }
+
+    @GetMapping(value = "/findByEndTimeBefore")
+    public Page<CuitCommodity> findByEndTimeBefore(@PageableDefault(size = 10,sort = "id"
+            ,direction = Sort.Direction.ASC)Pageable pageable){
+        return commodityService.findByEndTimeBefore(pageable);
     }
 }

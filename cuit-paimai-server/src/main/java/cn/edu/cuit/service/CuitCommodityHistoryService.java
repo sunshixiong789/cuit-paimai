@@ -1,7 +1,7 @@
 package cn.edu.cuit.service;
 
 import cn.edu.cuit.common.CommonResult;
-import cn.edu.cuit.model.CuitDescribe;
+import cn.edu.cuit.model.CuitCommodityHistory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,45 +9,46 @@ import java.util.List;
 
 /**
  * @author sunshixiong
- * @date 2018/4/16 21:32
+ * @date 2018/5/14 15:12
  */
-public interface CuitDescribeService {
+public interface CuitCommodityHistoryService {
+
     /**
      * 增加数据
+     *
      * @param entity
      * @return
      */
-    CommonResult add(CuitDescribe entity);
+    CommonResult add(CuitCommodityHistory entity);
+
     /**
      * 删除数据
+     *
      * @param entity
      * @return
      */
-    CommonResult delete(CuitDescribe entity);
+    CommonResult delete(CuitCommodityHistory entity);
+
     /**
      * 修改数据
+     *
      * @param entity
      * @return
      */
-    CommonResult update(CuitDescribe entity);
+    CommonResult update(CuitCommodityHistory entity);
 
     /**
      * 查询数据
+     *
      * @param entity
      * @return
      */
-    List<CuitDescribe> queryList(CuitDescribe entity);
+    List<CuitCommodityHistory> queryList(CuitCommodityHistory entity);
 
     /**
      * 分页查询
+     *
      * @return
      */
-    Page queryPage(CuitDescribe entity, Pageable pageable);
-
-    /**
-     * 通过商品查找描述
-     * @param id
-     * @return
-     */
-    CuitDescribe findByCommodityUuid(String id);
+    Page queryPage(CuitCommodityHistory entity, Pageable pageable);
 }

@@ -34,9 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .loginPage(cuitProperties.getBrower().getLoginPage())
-                .loginProcessingUrl("/form/login").failureUrl("/login?error=false")
+                .loginProcessingUrl("/form/login")
                 .successHandler(successHandler)
-                .failureHandler(failureHandler)
+                .failureHandler(failureHandler).failureUrl("/login?error=false")
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessHandler(new CuitLogoutSuccessHandler())
                 .and()

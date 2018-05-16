@@ -90,24 +90,24 @@
                             <div id="a" class="sub_content none">
                                 <dl>
                                     <dt>
-                                        <a href="/single-product?id=2">
+                                        <a href="/single-product?id=235">
                                             玉石类
                                         </a>
                                     </dt>
                                     <dd>
-                                        <a href="/single-product?id=2">
+                                        <a href="/single-product?id=235">
                                             和田玉挂件
                                         </a>
-                                        <a href="/single-product?id=2">
+                                        <a href="/single-product?id=235">
                                             和田玉手镯
                                         </a>
-                                        <a href="/single-product?id=2">
+                                        <a href="/single-product?id=235">
                                             和田玉大师作品
                                         </a>
-                                        <a href="/single-product?id=2">
+                                        <a href="/single-product?id=235">
                                             碧玉
                                         </a>
-                                        <a href="/single-product?id=2">
+                                        <a href="/single-product?id=235">
                                             白玉
                                         </a>
                                     </dd>
@@ -664,10 +664,10 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6" data-th-each="commodity : ${commoditys}">
+            <div class="col-md-3 col-sm-6" style="height: 450px" data-th-each="commodity : ${commoditys}">
                 <div class="single-shop-product">
-                    <div class="product-upper">
-                        <img src="img/product-2.jpg" data-th-src="@{/cuitfile/download(fileName=${commodity.picture},id=1)}" alt="">
+                    <div class="product-upper" style="height: 300px;">
+                        <img src="img/product-2.jpg" data-th-src="@{/cuitfile/downloadByName(name=${commodity.pictureUuid})}" alt="">
                     </div>
                     <h2><a href=""  data-th-href="@{/single-product(id=${commodity.id})}" data-th-text="${commodity.name}">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">

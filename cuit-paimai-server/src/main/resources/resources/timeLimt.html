@@ -45,7 +45,7 @@
                     <div class="col-md-3 col-sm-6" data-th-each="commodity : ${commoditys}">
                         <div class="single-shop-product">
                             <div class="product-upper">
-                                <img src="img/product-2.jpg" data-th-src="@{/cuitfile/download(fileName=${commodity.picture},id=1)}" alt="">
+                                <img src="img/product-2.jpg" data-th-src="@{/cuitfile/downloadByName(name=${commodity.pictureUuid})}" alt="">
                             </div>
                             <h2><a href=""  data-th-href="@{/single-product(id=${commodity.id})}" data-th-text="${commodity.name}">Apple new mac book 2015 March :P</a></h2>
                             <div class="product-option-shop">

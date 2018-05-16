@@ -5,6 +5,7 @@ import cn.edu.cuit.model.CuitCommodity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -51,5 +52,12 @@ public interface CuitCommodityService {
      * @param id
      * @return
      */
-    public CommonResult updateById(String presentPrice,Integer id);
+    CommonResult updateById(String presentPrice,Integer id,String buyUserId,String buyUserName);
+
+    /**
+     * 查看已经结束的商品
+     * @param pageable
+     * @return
+     */
+    Page<CuitCommodity> findByEndTimeBefore(Pageable pageable);
 }

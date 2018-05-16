@@ -82,10 +82,10 @@
                     <div class="product-carousel">
                         <div class="single-product" data-th-each="commodity : ${commoditys}">
                             <div class="product-f-image">
-                                <img src="img/product-1.jpg" data-th-src="@{/cuitfile/download(fileName=${commodity.picture},id=1)}" alt="">
+                                <img src="img/product-1.jpg" data-th-src="@{/cuitfile/downloadByName(name=${commodity.pictureUuid})}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>提交保证金</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>加入收藏</a>
+                                    <a data-th-href="@{/single-product(id=${commodity.id})}" href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>提交保证金</a>
+                                    <a data-th-href="@{/single-product(id=${commodity.id})}" href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>查看详情</a>
                                 </div>
                             </div>
 

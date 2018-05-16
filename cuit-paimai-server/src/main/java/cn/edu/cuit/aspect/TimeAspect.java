@@ -12,7 +12,7 @@ import java.util.Date;
  * @author sunshixiong
  * @date 2018/2/5 17:06
  */
-@Component
+/*@Component*/
 @Aspect
 @Slf4j
 public class TimeAspect {
@@ -23,16 +23,16 @@ public class TimeAspect {
      * @return
      * @throws Throwable
      */
-    @Around(value = "execution(* cn.edu.cuit.cuitpaimaiserver.controller.*.*(..))")
+    @Around(value = "execution(* cn.edu.cuit.controller.*.*(..))")
     public Object controllerAop(ProceedingJoinPoint pjp) throws Throwable {
         log.info("切片执行开始前");
         Object[] args = pjp.getArgs();
         for(Object arg:args){
             log.info((arg.toString()));
         }
-        long start = new Date().getTime();
+        long start = System.currentTimeMillis();
         Object object = pjp.proceed();
-        log.info("方法耗时 ："+(new Date().getTime()-start));
+        log.info("方法耗时 ："+(System.currentTimeMillis()-start));
         log.info("切片结束");
         return object;
     }
